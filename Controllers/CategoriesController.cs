@@ -184,7 +184,59 @@ namespace NorthwindTest.Controllers
             }
             return View();
         }
+        public ActionResult chartsWithPartialView()
+        {
+            // this method is used to demonstrate the use of partial views with charting
+            // this method uses the dame Category data is the categoryCarts method
+            _dataPoints = new List<DataPoint>();
+            var categories = db.Categories.Where(c => c.Products.Count > 0);
+            try
+            {
+                foreach (var cat in categories)
+                {
+                    var x = cat.Products.Count();
+                    var y = cat.CategoryName;
+                    _dataPoints.Add(new DataPoint(x, y));
+                }
+                ViewBag.chartType = "pie";
+                ViewBag.chartTitle = "Number of Products in Northwind Categories";
+                ViewBag.DataPoints = JsonConvert.SerializeObject(_dataPoints.ToList(), _jsonSetting);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.errMeg = ex.Message;
+                return View("Error");
+            }
 
+            return View();
+        }
+
+        public ActionResult multipleCharts()
+        {
+            // this method is used to demonstrate the use of partial views with charting
+            // this method uses the dame Category data is the categoryCarts method
+            _dataPoints = new List<DataPoint>();
+            var employees = db.Employees.OrderByDescending(e=>e.Orders.Count()).Take(10);
+            try
+            {
+                foreach (var emp in employees)
+                {
+                    var x = emp.Orders.Count();
+                    var y = emp.LastName+", "+emp.LastName;
+                    _dataPoints.Add(new DataPoint(x, y));
+                }
+                ViewBag.chartType = "pie";
+                ViewBag.chartTitle = "Top employees helping customers with orders";
+                ViewBag.DataPoints = JsonConvert.SerializeObject(_dataPoints.ToList(), _jsonSetting);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.errMeg = ex.Message;
+                return View("Error");
+            }
+
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

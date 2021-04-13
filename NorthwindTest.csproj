@@ -243,6 +243,10 @@
     <Content Include="Views\Categories\categoryCharts.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Categories\customerCharts.cshtml" />
+    <Content Include="Views\Categories\Error.cshtml" />
+    <Content Include="Views\Categories\chartsWithPartialView.cshtml" />
+    <Content Include="Views\Categories\_chart.cshtml" />
+    <Content Include="Views\Categories\multipleCharts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

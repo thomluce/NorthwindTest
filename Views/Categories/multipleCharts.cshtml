@@ -1,0 +1,106 @@
+﻿@model IEnumerable<NorthwindTest.DataPoint>
+@{
+    ViewBag.Title = "Multiple Charts";
+}
+@using Newtonsoft.Json;
+<div class="row">
+    <div class="col-md-5" id="chartContainer1" style="height:300px;">
+
+    </div>
+    <div class="col-md-1">
+        &nbsp; @*White space between charts*@
+    </div>
+    <div class="col-md-5" id="chartContainer2"  style="height:300px;">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" style="margin-top:40px;">
+        @*white space between rows of charts*@
+    </div>
+</div>
+<div class="row" >
+    <div class="col-md-5" id="chartContainer3">
+
+    </div>
+    <div class="col-md-1">
+        &nbsp; @*White space between charts*@
+    </div>
+    <div class="col-md-5" id="chartContainer4">
+
+    </div>
+</div>
+<script type="text/javascript">
+    var result = @Html.Raw(ViewBag.DataPoints);
+    var dataPoints =[];
+    for(var i = 0; i < result.length; i++){
+        dataPoints.push({label:result[i].label, y:result[i].y});
+    }
+
+    (function () {
+        var chart1 = new CanvasJS.Chart("chartContainer1", {
+            theme: "light2",
+            zoomEnabled: true,
+            animationEnabled: true,
+            height: 300,
+            title: {
+                text: "@ViewBag.chartTitle"
+            },
+            data: [
+            {
+                type: "pie",
+                dataPoints: dataPoints,
+            }
+            ]
+        });
+                var chart2 = new CanvasJS.Chart("chartContainer2", {
+            theme: "light2",
+            zoomEnabled: true,
+            animationEnabled: true,
+            height: 300,
+            title: {
+                text: "@ViewBag.chartTitle"
+            },
+            data: [
+            {
+                type: "scatter",
+                dataPoints: dataPoints,
+            }
+            ]
+                });
+                var chart3 = new CanvasJS.Chart("chartContainer3", {
+            theme: "light2",
+            zoomEnabled: true,
+            animationEnabled: true,
+            height: 300,
+            title: {
+                text: "@ViewBag.chartTitle"
+            },
+            data: [
+            {
+                type: "column",
+                dataPoints: dataPoints,
+            }
+            ]
+                });
+                var chart4 = new CanvasJS.Chart("chartContainer4", {
+            theme: "light2",
+            zoomEnabled: true,
+            animationEnabled: true,
+            height: 300,
+            title: {
+                text: "@ViewBag.chartTitle"
+            },
+            data: [
+            {
+                type: "bar",
+                dataPoints: dataPoints,
+            }
+            ]
+        });
+        chart1.render();
+        chart2.render();
+        chart3.render();
+        chart4.render();
+    })();
+</script>

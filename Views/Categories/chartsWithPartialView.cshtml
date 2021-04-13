@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Charts With Partial View";
+}
+
+<h2>Charts With Partial Views</h2>
+<div class="row">
+    <div class="col-md-12" >
+        <h2>This represents any data you would like to display before you get to the chart</h2>
+    </div>
+</div>
+<div class="row" style="margin-top:20px">
+    <div class="col-md-4">
+        <h3>This is any data you want to the left of the chart</h3>
+    </div>
+    <div id="chartContainer" class="col-md-4" style="height:200px;width:33%">
+        @{
+            ViewBag.chartType = "pie";
+            Html.RenderPartial("_chart");
+        }
+    </div>
+    <div class="col-md-4">
+        <h3>This is any data you want to the right of the chart</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" style="margin-top:20px">
+        <h2>This represents any data you would like to display after the chart</h2>
+    </div>
+</div>
+@{
+
+}
